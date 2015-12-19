@@ -1,0 +1,83 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">e-Notas</ui:define>
+	<ui:define name="corpo">
+		<h:form id="frmPesquisa">
+			<h1>Pesquisa de professores</h1>
+			
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar"
+						action="#{pesquisaProfessorBean.pesquisar}" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/professor/CadastroProfessor.xhtml" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<h:panelGrid columns="2" id="panel"
+				style="width:100%; margin-top: 20px" columnClasses="rotulo, campo">
+				<h:outputLabel value="Matrícula*" for="matricula" />
+				<p:inputMask id="matricula" mask="999999-9" value="#{pesquisaProfessorBean.professorFilter.matricula}"
+					size="50" />
+			</h:panelGrid>
+
+			<p:dataTable id="professoresTable"
+				value="#{pesquisaProfessorBean.professoresFiltrados}" var="professor"
+				style="margin-top: 20px" emptyMessage="Nenhum professor encontrado."
+				rows="10" paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+				<p:column headerText="Nome" style="text-align: left; width: 100px">
+					<h:outputText value="#{professor.nome}" />
+				</p:column>
+				
+				<p:column headerText="Matrícula"
+					style="text-align: left; width: 100px">
+					<h:outputText value="#{professor.matricula}" />
+				</p:column>
+
+				<p:column headerText="email"
+					style="text-align: left; width: 100px">
+					<h:outputText value="#{professor.email}" />
+				</p:column>
+
+				<p:column headerText="Telefone" style="text-align: left; width: 100px">
+					<h:outputText value="#{professor.telefone}" />
+				</p:column>
+
+				<p:column style="width: 5%; text-align: center">
+					<p:button outcome="/professor/CadastroProfessor" icon="ui-icon-pencil"
+						title="Editar">
+						<f:param name="professor" value="#{professor.id}" />
+					</p:button>
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="confirmacaoExclusao.show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaProfessorBean.professorSelecionado}" value="#{professor}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de professor"
+				message="Tem certeza que deseja excluir o professor #{pesquisaProfessorBean.professorSelecionado.nome}?"
+				widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:button value="Não"
+					onclick="confirmacaoExclusao.hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="confirmacaoExclusao.hide();"
+					action="#{pesquisaProfessorBean.excluir}" process="@this"
+					update=":frmPesquisa:professoresTable" ajax="false"/>
+			</p:confirmDialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

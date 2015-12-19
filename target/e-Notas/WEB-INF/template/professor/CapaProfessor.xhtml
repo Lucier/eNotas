@@ -1,0 +1,57 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+	
+	<h:panelGrid columns="4" style="width:100%; margin-top: 20px"
+		columnClasses="rotulo, campo, rotulo, campo">
+		
+		<p:outputLabel value="Nome*" for="nome" />
+		<p:inputText id="nome" value="#{cadastroProfessorBean.professor.nome}" size="24"/>
+
+		<p:outputLabel value="Matrícula*" for="matricula" />
+		<p:inputMask id="matricula" mask="999999-9" value="#{cadastroProfessorBean.professor.matricula}" size="24"/>
+		
+		<p:outputLabel value="Email*" for="email" />
+		<p:inputText id="email" value="#{cadastroProfessorBean.professor.email}" size="24"/>
+			
+		<p:outputLabel value="Telefone*" for="telefone" />
+		<p:inputMask mask="(99)99999-9999" id="telefone" value="#{cadastroProfessorBean.professor.telefone}" size="24"/>
+	</h:panelGrid>
+	
+	<br />
+	<br />
+	<br />
+	<br />
+		
+	<p:fieldset legend="Endereço">
+		<h:panelGrid columns="4" style="width:100%; margin-top: 20px"
+		columnClasses="rotulo, campo, rotulo, campo">
+		
+			<p:outputLabel value="Rua" for="rua" />
+			<p:inputText id="rua" value="#{cadastroProfessorBean.professor.rua}" size="24"/>
+		
+			<p:outputLabel value="Nº *" for="numero" />
+			<p:inputText id="numero" value="#{cadastroProfessorBean.professor.numero}" size="24"/>
+		
+			<p:outputLabel value="Complemento" for="complemento" />
+			<p:inputText id="complemento" value="#{cadastroProfessorBean.professor.complemento}" size="24"/>
+		
+			<p:outputLabel value="CEP*" for="cep" />
+			<p:inputMask id="cep" mask="99999-999" value="#{cadastroProfessorBean.professor.cep}" size="24"/>
+		
+			<p:outputLabel value="Cidade" for="cidade" />
+			<p:inputText id="cidade" value="#{cadastroProfessorBean.professor.cidade}" size="24"/>
+		
+			<p:outputLabel value="Uf*" for="uf" />
+			<p:inputText id="uf" value="#{cadastroProfessorBean.professor.uf}" size="24"/>
+		</h:panelGrid>
+	</p:fieldset>
+    		
+    		<br />
+    		<br />
+    		<h:outputLabel value="Os campos seguidos de * são de preenchimento obrigatório." />
+	
+	
+</ui:composition>

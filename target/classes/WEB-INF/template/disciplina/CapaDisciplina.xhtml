@@ -1,0 +1,44 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+	
+	<h:panelGrid columns="4" style="width:100%; margin-top: 20px"
+		columnClasses="rotulo, campo, rotulo, campo">
+
+		<p:outputLabel value="Nome*" for="nome" />
+		<p:inputText id="nome" value="#{cadastroDisciplinaBean.disciplina.nome}" size="24"/>
+
+		<p:outputLabel value="Carga horária*" for="cargahoraria" />
+		<p:inputText id="cargahoraria" value="#{cadastroDisciplinaBean.disciplina.cargaHoraria}" size="24"/>
+		
+		<p:outputLabel value="Curso*" for="curso" />
+		<p:selectOneMenu id="curso" value="#{cadastroDisciplinaBean.disciplina.curso}">
+			<f:selectItem itemLabel="Selecione um curso" />
+			<f:selectItems value="#{cadastroDisciplinaBean.cursos}" var="curso"
+				itemValue="#{curso}" itemLabel="#{curso.nome}" />
+		</p:selectOneMenu>
+		
+		<p:outputLabel value="Professor*" for="professor" />
+		<p:selectOneMenu id="professor" value="#{cadastroDisciplinaBean.disciplina.professor}">
+			<f:selectItem itemLabel="Selecione um professor" />
+			<f:selectItems value="#{cadastroDisciplinaBean.professores}" var="professor"
+				itemValue="#{professor}" itemLabel="#{professor.nome}" />
+		</p:selectOneMenu>
+		
+			<h:outputLabel />
+    		<h:outputLabel />
+    		<h:outputLabel />
+    		<h:outputLabel />
+    		<h:outputLabel />
+    		<h:outputLabel />
+    		<h:outputLabel />
+    		<h:outputLabel />
+    		<h:outputLabel />
+    		
+    		
+    		<h:outputLabel value="Os campos seguidos de * são de preenchimento obrigatório." />
+	</h:panelGrid>	
+	
+</ui:composition>

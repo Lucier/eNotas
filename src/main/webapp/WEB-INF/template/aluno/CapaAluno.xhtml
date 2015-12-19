@@ -1,0 +1,89 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<h:panelGrid columns="4" style="width:100%; margin-top: 20px"
+		columnClasses="rotulo, campo, rotulo, campo">
+
+		<p:outputLabel value="Nome*" for="nome" />
+		<p:inputText id="nome" value="#{cadastroAlunoBean.aluno.nome}"
+			size="24" />
+
+		<p:outputLabel value="Matrícula*" for="matricula" />
+		<p:inputMask id="matricula" mask="999999-9"
+			value="#{cadastroAlunoBean.aluno.matricula}" size="24" />
+
+		<p:outputLabel value="Email*" for="email" />
+		<p:inputText id="email" value="#{cadastroAlunoBean.aluno.email}"
+			size="24" />
+
+		<p:outputLabel value="Telefone*" for="telefone" />
+		<p:inputMask mask="(99)99999-9999" id="telefone"
+			value="#{cadastroAlunoBean.aluno.telefone}" size="24" />
+
+		<p:outputLabel value="Data de nascimento" for="nascimento" />
+		<p:inputMask mask="99/99/9999" id="nascimento"
+			value="#{cadastroAlunoBean.aluno.dataNascimento}" size="24" />
+
+		<p:outputLabel value="Responsável*" for="responsavel" />
+		<p:inputText id="responsavel"
+			value="#{cadastroAlunoBean.aluno.respnsavel}" size="24" />
+
+		<p:outputLabel value="Curso*" for="curso" />
+		<p:selectOneMenu id="curso" value="#{cadastroAlunoBean.aluno.curso}">
+			<f:selectItem itemLabel="Selecione um curso" />
+			<f:selectItems value="#{cadastroAlunoBean.cursos}" var="curso"
+				itemValue="#{curso}" itemLabel="#{curso.nome}" />
+		</p:selectOneMenu>
+
+		<p:outputLabel value="Sala*" for="sala" />
+		<p:selectOneMenu id="sala" value="#{cadastroAlunoBean.aluno.sala}">
+			<f:selectItem itemLabel="Selecione uma sala" />
+			<f:selectItems value="#{cadastroAlunoBean.salas}" var="sala"
+				itemValue="#{sala}" itemLabel="#{sala.nome}" />
+		</p:selectOneMenu>
+	</h:panelGrid>
+
+	<br />
+	<br />
+	<br />
+	<br />
+
+	<p:fieldset legend="Endereço">
+		<h:panelGrid columns="4" style="width:100%; margin-top: 20px"
+			columnClasses="rotulo, campo, rotulo, campo">
+
+			<p:outputLabel value="Rua" for="rua" />
+			<p:inputText id="rua" value="#{cadastroAlunoBean.aluno.rua}"
+				size="24" />
+
+			<p:outputLabel value="Nº *" for="numero" />
+			<p:inputText id="numero" value="#{cadastroAlunoBean.aluno.numero}"
+				size="24" />
+
+			<p:outputLabel value="Complemento" for="complemento" />
+			<p:inputText id="complemento"
+				value="#{cadastroAlunoBean.aluno.complemento}" size="24" />
+
+			<p:outputLabel value="CEP*" for="cep" />
+			<p:inputMask id="cep" mask="99999-999"
+				value="#{cadastroAlunoBean.aluno.cep}" size="24" />
+
+			<p:outputLabel value="Cidade" for="cidade" />
+			<p:inputText id="cidade" value="#{cadastroAlunoBean.aluno.cidade}"
+				size="24" />
+
+			<p:outputLabel value="Uf*" for="uf" />
+			<p:inputText id="uf" value="#{cadastroAlunoBean.aluno.uf}" size="24" />
+		</h:panelGrid>
+	</p:fieldset>
+
+	<br />
+	<br />
+	<h:outputLabel
+		value="Os campos seguidos de * são de preenchimento obrigatório." />
+
+
+</ui:composition>

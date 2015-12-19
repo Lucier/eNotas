@@ -1,0 +1,83 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui">
+
+	<ui:define name="titulo">e-Notas</ui:define>
+	<ui:define name="corpo">
+		<h:form id="frmPesquisa">
+			<h1>Pesquisa de alunos</h1>
+			
+			<p:messages autoUpdate="true" closable="true" />
+
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:commandButton value="Pesquisar"
+						action="#{pesquisaAlunoBean.pesquisar}" update="@form" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Novo" outcome="/aluno/CadastroAluno.xhtml" />
+				</p:toolbarGroup>
+			</p:toolbar>
+
+			<h:panelGrid columns="2" id="panel"
+				style="width:100%; margin-top: 20px" columnClasses="rotulo, campo">
+				<h:outputLabel value="Matrícula*" for="matricula" />
+				<p:inputMask id="matricula" mask="999999-9" value="#{pesquisaAlunoBean.alunoFilter.matricula}"
+					size="50" />
+			</h:panelGrid>
+
+			<p:dataTable id="alunosTable"
+				value="#{pesquisaAlunoBean.alunosFiltrados}" var="aluno"
+				style="margin-top: 20px" emptyMessage="Nenhum aluno encontrado."
+				rows="10" paginator="true" paginatorAlwaysVisible="false"
+				paginatorPosition="bottom">
+				<p:column headerText="Nome" style="text-align: left; width: 100px">
+					<h:outputText value="#{aluno.nome}" />
+				</p:column>
+				
+				<p:column headerText="Matrícula"
+					style="text-align: left; width: 100px">
+					<h:outputText value="#{aluno.matricula}" />
+				</p:column>
+
+				<p:column headerText="Responsável"
+					style="text-align: left; width: 100px">
+					<h:outputText value="#{aluno.respnsavel}" />
+				</p:column>
+
+				<p:column headerText="Telefone" style="text-align: left; width: 100px">
+					<h:outputText value="#{aluno.telefone}" />
+				</p:column>
+
+				<p:column style="width: 5%; text-align: center">
+					<p:button outcome="/aluno/CadastroAluno" icon="ui-icon-pencil"
+						title="Editar">
+						<f:param name="aluno" value="#{aluno.id}" />
+					</p:button>
+
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						oncomplete="confirmacaoExclusao.show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+						<f:setPropertyActionListener
+							target="#{pesquisaAlunoBean.alunoSelecionado}" value="#{aluno}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+
+			<p:confirmDialog header="Exclusão de aluno"
+				message="Tem certeza que deseja excluir o aluno #{pesquisaAlunoBean.alunoSelecionado.nome}?"
+				widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog">
+				<p:button value="Não"
+					onclick="confirmacaoExclusao.hide(); return false;" />
+				<p:commandButton value="Sim"
+					oncomplete="confirmacaoExclusao.hide();"
+					action="#{pesquisaAlunoBean.excluir}" process="@this"
+					update=":frmPesquisa:alunosTable" ajax="false"/>
+			</p:confirmDialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

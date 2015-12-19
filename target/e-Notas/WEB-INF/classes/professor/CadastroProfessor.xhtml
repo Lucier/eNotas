@@ -1,0 +1,30 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:x="http://xsistemas.com">
+	
+	<ui:define name="titulo">e-Notas</ui:define>
+
+	<ui:define name="corpo">
+	
+	<f:metadata>
+		<o:viewParam name="professor" value="#{cadastroProfessorBean.professor}" />
+	</f:metadata>
+	
+		<h:form>
+			<h1>#{cadastroProfessorBean.editando ? "Edição de professores" : "Novo professor"}</h1>
+			
+			<!--  <p:messages autoUpdate="true" closable="true" /> -->
+			
+			<x:modalMessage />
+
+			<ui:include src="/WEB-INF/template/professor/BotoesProfessor.xhtml" />
+
+			<ui:include src="/WEB-INF/template/professor/CapaProfessor.xhtml" />
+
+		</h:form>
+	</ui:define>
+</ui:composition>
